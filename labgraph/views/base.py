@@ -47,7 +47,7 @@ class BaseView:
                 entry_in_db = self.get_by_name(name=entry.name)[
                     0
                 ]  # will throw NotFoundInDatabaseError if no matches
-                if entry_in_db.id != entry.id:
+                if entry_in_db.id != entry.id and if_already_in_db == "raise":
                     # if id is different, implies there is a different entry with the same name already!
                     raise AlreadyInDatabaseError(
                         f"Cannot add {entry} because an entry with the same name already exists in the database! Duplicate names are not allowed for entries of type {self._entry_class.__name__}."
